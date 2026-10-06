@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-container">
+    <div class="dash-header">
+        <h2><i class="fa-solid fa-tower-broadcast"></i> Guardian Intelligence Center</h2>
+        <span class="live-pill"><i class="fa-solid fa-circle pulse"></i> Live Feed Synced</span>
+    </div>
+
+    <div class="alert-grid">
+        <div class="feed-section">
+            <h3>Remote Optical Monitor</h3>
+            <img src="{{ url_for('video_feed') }}" class="feed-img-small" />
+        </div>
+
+        <div class="alerts-section">
+            <h3>Emergency Telemetry Log</h3>
+            <table class="alert-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Incident</th>
+                        <th>Confidence</th>
+                        <th>Coordinates</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="alertsBody">
+                    {% for a in alerts %}
+                    <tr class="alert-row">
+                        <td>{{ a.timestamp }}</td>
+                        <td><span class="badge danger">{{ a.type }}</span></td>
+                        <td>{{ a.confidence }}</td>
+                        <td>{{ a.latitude }}, {{ a.longitude }}</td>
+                        <td><a href="https://maps.google.com/?q={{ a.latitude }},{{ a.longitude }}" target="_blank" class="map-link"><i class="fa-solid fa-map-location-dot"></i> Map</a></td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="5">No incidents recorded yet. All secure.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+setInterval(() => {
+    fetch('/api/alerts')
+        .then(res => res.json())
+        .then(data => {
+            const body = document.getElementById('alertsBody');
+            if (!data || data.length === 0) return;
+            body.innerHTML = data.map(a => `
+                <tr class="alert-row">
+                    <td>${a.timestamp}</td>
+                    <td><span class="badge danger">${a.type}</span></td>
+                    <td>${a.confidence}</td>
+                    <td>${a.latitude}, ${a.longitude}</td>
+                    <td><a href="https://maps.google.com/?q=${a.latitude},${a.longitude}" target="_blank" class="map-link"><i class="fa-solid fa-map-location-dot"></i> Map</a></td>
+                </tr>
+            `).join('');
+        });
+}, 3000);
+</script>
+{% endblock %}

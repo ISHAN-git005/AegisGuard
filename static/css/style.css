@@ -1,0 +1,141 @@
+:root {
+    --bg-main: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --danger: #ef4444;
+    --accent: #38bdf8;
+    --border: #334155;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #090d16;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.navbar nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+}
+
+.navbar nav a:hover {
+    color: var(--accent);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.video-wrapper {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+}
+
+.feed-img {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+}
+
+.feed-img-small {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.panic-panel {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.sos-button {
+    background-color: var(--danger);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 1.2rem 3rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    transition: 0.2s transform ease;
+}
+
+.sos-button:active {
+    transform: scale(0.96);
+}
+
+.dashboard-container .alert-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.alert-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.alert-table th, .alert-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.alert-table th {
+    background: #111827;
+}
+
+.badge.danger {
+    background: var(--danger);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.map-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.live-pill {
+    font-size: 0.85rem;
+    color: #4ade80;
+}
+
+.pulse {
+    animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}

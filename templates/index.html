@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="client-container">
+    <div class="status-card">
+        <h2>Ward Safety Terminal (Child / Senior Mode)</h2>
+        <p>Real-time optical intelligence and fall detection active.</p>
+        
+        <div class="video-wrapper">
+            <img src="{{ url_for('video_feed') }}" alt="Live Feed" class="feed-img" />
+        </div>
+
+        <div class="panic-panel">
+            <button id="sosBtn" class="sos-button" onclick="sendSOS()">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>PANIC / SOS</span>
+            </button>
+            <p id="sosNotice" class="subtext">Press in case of immediate danger or medical issue.</p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
